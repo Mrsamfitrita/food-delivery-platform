@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.7'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+springBoot {
+    mainClass = 'com.example.user.RestaurantServiceApp'
+}
+
+
+dependencies {
+    // Spring Boot Starters
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // ДОБАВЛЕНО: Jakarta Validation - Для @Valid, @NotBlank, @Size
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Database
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-database-postgresql'
+    implementation 'org.postgresql:postgresql'
+
+    // JWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    // Lombok (для @Data)
+    compileOnly 'org.projectlombok:lombok'
+
+    // ДОБАВЛЕНО: MapStruct - Для маппинга DTO <-> Entity
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+
+    // Annotation Processors (важно для генерации кода)
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // ДОБАВЛЕНО: MapStruct Processor - Зависит от Lombok
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    // ДОБАВЛЕНО: Lombok MapStruct Binding - Совместная работа Lombok и MapStruct
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    // Annotation Processors (для генерации кода)
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Lombok — ОБЯЗАТЕЛЬНО!
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0' // Для MapStruct + Lombok
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+}
